@@ -1,0 +1,25 @@
+Running Proxmox on TerraMaster-F8-SSD-Plus with multiple NVMEs and VT-D enabled
+--------------------------------------------------------------------------------
+
+1. Go to F8 SSD Plus system Bios and disable VT-D, save Bios and reboot/boot system,
+
+2. Modify /etc/default/grub file to include/update GRUB_CMDLINE_LINUX_DEFAULT to have:
+- pci=nommconf
+- pcie_acs_override=downstream, intel_iommu=on, iommu=pt
+
+Here is how GRUB_CMDLINE_LINUX_DEFAULT should look after modification:
+GRUB_CMDLINE_LINUX_DEFAULT="pci=nommconf pcie_acs_override=downstream intel_iommu=on iommu=pt"
+
+Notes:
+- pci=nommconf -> necessary to be able to boot with VT-D enabled
+- pcie_acs_override=downstream, intel_iommu=on, iommu=pt -> for IOMMU and IOMMU isolation to work
+
+3. Save /etc/default/grub
+
+4. Run update-grub command
+
+5. Reboot F8 SSD Plus system
+
+6. In Bios, re-enable VT-D, save and start F8 SSD Plus system
+
+Now you should have F8 SSD Plus system with mutiple NVMEs and Proxmox working with VT-D enabled.
