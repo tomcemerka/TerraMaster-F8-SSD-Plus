@@ -1,4 +1,4 @@
-Running Proxmox on TerraMaster-F8-SSD-Plus with multiple NVMEs and VT-D enabled
+Running Proxmox on TerraMaster F8 SSD Plus with multiple NVMEs and VT-D enabled
 --------------------------------------------------------------------------------
 
 1. Go to F8 SSD Plus system Bios and disable VT-D, save Bios and reboot/boot system,

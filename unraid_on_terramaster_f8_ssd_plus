@@ -1,0 +1,37 @@
+Running Unraid on TerraMaster F8 SSD Plus with multiple NVMEs and VT-D enabled
+--------------------------------------------------------------------------------
+
+1. Open the syslinux config file /boot/syslinux/syslinux.cfg
+
+2. Find the boot entry you usually use (probably labeled as Unraid OS) and add pci=nommconf to the append line:
+  append initrd=/bzroot pci=nommconf
+
+
+Here is an example of full syslinux.cfg file:
+
+root@unraid:~# cat /boot/syslinux/syslinux.cfg 
+default menu.c32
+menu title Lime Technology, Inc.
+prompt 0
+timeout 50
+label Unraid OS
+  menu default
+  kernel /bzimage
+  append initrd=/bzroot pci=nommconf
+label Unraid OS GUI Mode
+  kernel /bzimage
+  append initrd=/bzroot,/bzroot-gui pci=nommconf
+label Unraid OS Safe Mode (no plugins, no GUI)
+  kernel /bzimage
+  append initrd=/bzroot unraidsafemode pci=nommconf
+label Unraid OS GUI Safe Mode (no plugins)
+  kernel /bzimage
+  append initrd=/bzroot,/bzroot-gui unraidsafemode pci=nommconf
+label Memtest86+
+  kernel /memtest
+root@unraid:~# 
+
+
+3. Save the file
+
+4. Reboot
